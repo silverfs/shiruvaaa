@@ -1,0 +1,18 @@
+###
+https://shiruvaaa.net/security.txt
+###
+
+If you think you've identified a security issue on this or any other of my (sub)domains, 
+please do not report the issue publicly via a mailing list, IRC, 
+a public issue on issue trackers, a merge request, or any other public venue.
+
+Instead, send an email to security@shiruvaaa.net. Please include as many details as possible, including a minimal reproducible example of the issue, and an idea of how exploitable/severe you think the issue is.
+If you have possible patches which may fix the issue, please attach them to your security vulnerability report.
+
+
+Thank you very much :3
+
+
+
+Contact: mailto:security@shiruvaaa.net
+Expires: 2024-12-31T23:59:00.000Z
