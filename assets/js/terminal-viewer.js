@@ -16,7 +16,11 @@ $.fn.typewriter = function(options) {
         for (; ">" != b.substring(a, a + 1);) a++;
       }
       c.html(b.substring(0, a++) + '<span class="cursor">' + (a & 3 ? "_" : "") + '</span>');
-      if (Math.max(window.innerWidth, screen.width) > 600 && 
+
+      const isLargeScreen = Math.max(window.innerWidth, screen.width) > 600;
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      const isLandscape = window.matchMedia("(orientation: landscape)").matches;
+      if (isLargeScreen && !(isMobile && isLandscape) &&
           c.scrollTop() + c.innerHeight() >= c[0].scrollHeight - 40) {
         c.scrollTop(c[0].scrollHeight); // Scroll to the bottom only if near the bottom
       }
