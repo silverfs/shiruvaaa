@@ -71,9 +71,10 @@ body {
   box-sizing: inherit;
   position: absolute;
   height: 100%;
-  width: 1000px;
+  width: 100%;
   max-width: 100%;
   padding: 4rem;
+  /* padding-right: 10rem; */
   text-transform: uppercase;
   overflow-y: auto; /* Enable vertical scrolling */
   scrollbar-width: none; /* For Firefox */
@@ -86,9 +87,6 @@ body {
 
 .output {
   color: rgba(128, 130, 255, 0.8);
-  text-shadow:
-      0 0 1px rgba(51, 156, 255, 0.4),
-      0 0 2px rgba(255, 255, 255, 0.8);
   margin-bottom: 0rem; /* Adjust the margin to reduce spacing */
 }
 
