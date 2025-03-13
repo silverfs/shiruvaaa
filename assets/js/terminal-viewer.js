@@ -16,9 +16,11 @@ $.fn.typewriter = function(options) {
         for (; ">" != b.substring(a, a + 1);) a++;
       }
       c.html(b.substring(0, a++) + '<span class="cursor">' + (a & 3 ? "_" : "") + '</span>');
-      if (c.scrollTop() + c.innerHeight() >= c[0].scrollHeight - 40) { // Allow a small buffer
+      if (Math.max(window.innerWidth, screen.width) > 600 && 
+          c.scrollTop() + c.innerHeight() >= c[0].scrollHeight - 40) {
         c.scrollTop(c[0].scrollHeight); // Scroll to the bottom only if near the bottom
       }
+
       if (a < b.length) {
         // Check if the current position matches any of the pause IDs
         var currentHtml = b.substring(d, a);
