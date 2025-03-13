@@ -33,6 +33,7 @@ $.fn.typewriter = function(options) {
         }
       } else {
         $('.cursor').addClass('blink');
+        sessionStorage.setItem('animationPlayed', 'true');
       }
     };
     e();
@@ -40,13 +41,14 @@ $.fn.typewriter = function(options) {
   return this;
 };
 
-// Initialize the typewriter with pause IDs and durations
-$(".terminal").typewriter({
-  pauses: {
-    'pause1': 2500,
-    'pause2': 1000,
-    'pause3': 5000,
-    'pause4': 15000,
-    'pause5': 22000,
-  }
-});
+if (!sessionStorage.getItem('animationPlayed')) {
+  $(".terminal").typewriter({
+    pauses: {
+      'pause1': 2500,
+      'pause2': 1000,
+      'pause3': 5000,
+      'pause4': 15000,
+      'pause5': 22000,
+    }
+  });
+}
