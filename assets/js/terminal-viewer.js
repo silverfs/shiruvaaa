@@ -38,7 +38,7 @@ $.fn.typewriter = function(options) {
         }
       } else {
         $('.cursor').addClass('blink');
-        if (!$('body').attr('data-page-type') === '404') {
+        if ($('body').attr('data-page-type') !== '404') {
           sessionStorage.setItem('animationPlayed', 'true');
         }
       }
@@ -47,8 +47,7 @@ $.fn.typewriter = function(options) {
   });
   return this;
 };
-
-if (!$('body').attr('data-page-type') === '404' && !sessionStorage.getItem('animationPlayed')) {
+if ($('body').attr('data-page-type') !== '404' && !sessionStorage.getItem('animationPlayed')) {
   $(".terminal").typewriter({
     pauses: {
       'pause1': 2500,
@@ -65,5 +64,6 @@ if (!$('body').attr('data-page-type') === '404' && !sessionStorage.getItem('anim
       'pause7': 1000,
     }
   });
+  console.log('3');
   $(".terminal").typewriter();
 }
