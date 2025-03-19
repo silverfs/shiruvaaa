@@ -59,5 +59,11 @@ if (!$('body').attr('data-page-type') === '404' && !sessionStorage.getItem('anim
     }
   });
 } else if ($('body').attr('data-page-type') === '404') {
+  $(".terminal").typewriter({
+    pauses: {
+      'pause6': 5000,
+      'pause7': 1000,
+    }
+  });
   $(".terminal").typewriter();
 }
