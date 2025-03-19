@@ -1,7 +1,7 @@
 $.fn.typewriter = function(options) {
   const settings = $.extend({
     speed: 2.5,
-    pauses: {} // Object with pause IDs and their durations
+    pauses: {}
   }, options);
 
   this.each(function() {
@@ -12,7 +12,6 @@ $.fn.typewriter = function(options) {
     c.html("");
     var e = function() {
       if ("<" == b.substring(a, a + 1)) {
-        // Skip over HTML tags
         for (; ">" != b.substring(a, a + 1);) a++;
       }
       c.html(b.substring(0, a++) + '<span class="cursor">' + (a & 3 ? "_" : "") + '</span>');

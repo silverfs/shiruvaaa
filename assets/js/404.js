@@ -12,6 +12,7 @@ $(document).ready(function() {
   ];
 
   let lastMessage = "";
+  let isInitialMessage = true;
 
   function typeBack($element, callback) {
     const text = $element.text();
@@ -37,10 +38,17 @@ $(document).ready(function() {
     lastMessage = randomMessage;
     const $output = $(".terminal .output").first();
     typeBack($output, function() {
-      $output.html(randomMessage).typewriter({ speed: 5 }); // Slower speed
+      $output.html(randomMessage).typewriter({ speed: 5 });
     });
   }
-  // Set initial message
-  changeMessage();
-  setInterval(changeMessage, 12000); // Change message every 12 seconds
+
+  // Initial message handling
+  const $initialOutput = $(".terminal .output").first();
+  $initialOutput.typewriter({ speed: 5 });
+
+  setTimeout(function() {
+    isInitialMessage = false;
+    changeMessage();
+    setInterval(changeMessage, 12000); // Change message every 12 seconds
+  }, 17000);
 });
