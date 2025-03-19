@@ -53,8 +53,8 @@ if (!sessionStorage.getItem('animationPlayed')) {
       'pause1': 2500,
       'pause2': 1000,
       'pause3': 5000,
-      'pause4': 15000,
-      'pause5': 22000,
+      'pause4': 12000,
+      'pause5': 19000,
     }
   });
 }
