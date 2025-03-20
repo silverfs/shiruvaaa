@@ -1,3 +1,28 @@
+let autoScrollEnabled = true;
+const isLargeScreen = Math.max(window.innerWidth, screen.width) > 600;
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+const isLandscape = window.matchMedia("(orientation: landscape)").matches;
+
+function toggleAutoScroll() {
+  autoScrollEnabled = !autoScrollEnabled;
+  $('#autoscroll-toggle').text(autoScrollEnabled ? 'Disable Autoscroll' : 'Enable Autoscroll');
+}
+
+// Disable autoscroll by default if it's a small screen
+if (!isLargeScreen || (isMobile && isLandscape)) {
+  autoScrollEnabled = false;
+}
+
+// Initialize the autoscroll toggle after the DOM is fully loaded
+document.addEventListener('DOMContentLoaded', function () {
+  const autoscrollToggle = document.getElementById('autoscroll-toggle');
+  if (autoscrollToggle) {
+    // Initial label
+    autoscrollToggle.textContent = autoScrollEnabled ? 'Disable Autoscroll' : 'Enable Autoscroll';
+    autoscrollToggle.addEventListener('click', toggleAutoScroll);
+  }
+});
+
 $.fn.typewriter = function(options) {
   const settings = $.extend({
     speed: 2.5,
@@ -16,12 +41,15 @@ $.fn.typewriter = function(options) {
       }
       c.html(b.substring(0, a++) + '<span class="cursor">' + (a & 3 ? "_" : "") + '</span>');
 
-      const isLargeScreen = Math.max(window.innerWidth, screen.width) > 600;
-      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-      const isLandscape = window.matchMedia("(orientation: landscape)").matches;
-      if (isLargeScreen && !(isMobile && isLandscape) &&
-          c.scrollTop() + c.innerHeight() >= c[0].scrollHeight - 40) {
-        c.scrollTop(c[0].scrollHeight); // Scroll to the bottom only if near the bottom
+      if (!autoScrollEnabled) {
+        // Don't scroll
+      } else if (isLargeScreen && !(isMobile && isLandscape) &&
+        c.scrollTop() + c.innerHeight() >= c[0].scrollHeight - 40) {
+        // Scroll to the bottom only if near the bottom
+        c.scrollTop(c[0].scrollHeight);
+      } else {
+        // Always scroll to the bottom if autoscroll is enabled
+        c.scrollTop(c[0].scrollHeight);
       }
 
       if (a < b.length) {
@@ -32,7 +60,7 @@ $.fn.typewriter = function(options) {
           setTimeout(function() {
             d = a; // Update the start position after the pause
             e();
-          }, settings.pauses[pauseId]); // Use the specified pause duration
+          }, settings.pauses[pauseId]);
         } else {
           setTimeout(e, (3 + 10 * Math.random()) * settings.speed);
         }
@@ -47,6 +75,7 @@ $.fn.typewriter = function(options) {
   });
   return this;
 };
+
 if ($('body').attr('data-page-type') !== '404' && !sessionStorage.getItem('animationPlayed')) {
   $(".terminal").typewriter({
     pauses: {
@@ -64,6 +93,5 @@ if ($('body').attr('data-page-type') !== '404' && !sessionStorage.getItem('anima
       'pause7': 1000,
     }
   });
-  console.log('3');
   $(".terminal").typewriter();
 }
