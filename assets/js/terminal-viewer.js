@@ -41,14 +41,7 @@ $.fn.typewriter = function(options) {
       }
       c.html(b.substring(0, a++) + '<span class="cursor">' + (a & 3 ? "_" : "") + '</span>');
 
-      if (!autoScrollEnabled) {
-        // Don't scroll
-      } else if (isLargeScreen && !(isMobile && isLandscape) &&
-        c.scrollTop() + c.innerHeight() >= c[0].scrollHeight - 40) {
-        // Scroll to the bottom only if near the bottom
-        c.scrollTop(c[0].scrollHeight);
-      } else {
-        // Always scroll to the bottom if autoscroll is enabled
+      if (autoScrollEnabled && c.scrollTop() + c.innerHeight() >= c[0].scrollHeight - 40) {
         c.scrollTop(c[0].scrollHeight);
       }
 
