@@ -50,5 +50,5 @@ $(document).ready(function() {
     isInitialMessage = false;
     changeMessage();
     setInterval(changeMessage, 12000); // Change message every 12 seconds
-  }, 15000);
+  }, 14000);
 });
