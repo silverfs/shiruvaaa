@@ -30,41 +30,43 @@ $.fn.typewriter = function(options) {
   }, options);
 
   this.each(function() {
-    var c = $(this),
-      b = c.html(),
-      a = 0,
-      d = 0;
-    c.html("");
-    var e = function() {
-      if ("<" == b.substring(a, a + 1)) {
-        for (; ">" != b.substring(a, a + 1);) a++;
+    var component = $(this),
+      htmlContent = component.html(),
+      position = 0,
+      positionAfterLastPause = 0;
+    component.html("");
+    var updateCursor = function() {
+      if ("<" == htmlContent.substring(position, position + 1)) {
+        for (; ">" != htmlContent.substring(position, position + 1);) position++;
       }
-      c.html(b.substring(0, a++) + '<span class="cursor">' + (a & 3 ? "_" : "") + '</span>');
+      // Create the cursor element
+      component.html(htmlContent.substring(0, position + 1) + ('<span class="cursor blink">' + (position & 3 ? "_" : "") + "</span>"));
 
-      if (autoScrollEnabled && c.scrollTop() + c.innerHeight() >= c[0].scrollHeight - 40) {
-        c.scrollTop(c[0].scrollHeight);
+      if (autoScrollEnabled && component.scrollTop() + component.innerHeight() >= component[0].scrollHeight - 40) {
+        component.scrollTop(component[0].scrollHeight);
       }
 
-      if (a < b.length) {
+      if (position < htmlContent.length) {
         // Check if the current position matches any of the pause IDs
-        var currentHtml = b.substring(d, a);
+        var currentHtml = htmlContent.substring(positionAfterLastPause, position);
         var pauseId = Object.keys(settings.pauses).find(id => currentHtml.includes(`id="${id}"`));
         if (pauseId) {
+          
           setTimeout(function() {
-            d = a; // Update the start position after the pause
-            e();
+            positionAfterLastPause = position - 1; // Update the start position after the pause
+            updateCursor();
           }, settings.pauses[pauseId]);
         } else {
-          setTimeout(e, (3 + 10 * Math.random()) * settings.speed);
+          setTimeout(updateCursor, (3 + 10 * Math.random()) * settings.speed);
         }
       } else {
-        $('.cursor').addClass('blink');
         if ($('body').attr('data-page-type') !== '404') {
           sessionStorage.setItem('animationPlayed', 'true');
         }
       }
+      position++;
     };
-    e();
+    updateCursor();
   });
   return this;
 };
