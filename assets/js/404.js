@@ -46,9 +46,10 @@ $(document).ready(function() {
   const $initialOutput = $(".terminal .output").first();
   $initialOutput.typewriter({ speed: 5 });
 
+  // Start changing messages earlier
   setTimeout(function() {
     isInitialMessage = false;
     changeMessage();
     setInterval(changeMessage, 12000); // Change message every 12 seconds
-  }, 14000);
+  }, 0); // Reduced delay to overlap with initial animation
 });

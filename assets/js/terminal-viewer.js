@@ -84,8 +84,8 @@ if ($('body').attr('data-page-type') !== '404' && !sessionStorage.getItem('anima
 } else if ($('body').attr('data-page-type') === '404') {
   $(".terminal").typewriter({
     pauses: {
-      'pause6': 5000,
-      'pause7': 1000,
+      'pause6': 3000,
+      'pause7': 2000,
     }
   });
   $(".terminal").typewriter();
