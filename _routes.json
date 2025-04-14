@@ -1,0 +1,11 @@
+{
+    "version": 2,
+    "include": [
+      "/*"
+    ],
+    "exclude": [
+      "/docker-compose.yml*",
+      "/Dockerfile",
+      "/default.conf"
+    ]
+  }
